@@ -93,13 +93,6 @@ def get_ttfl_history(cache_date: str | None = None, force_refresh: bool = False)
     if is_cached(cache_path) and not force_refresh:
         return load_df_cache(cache_path)
 
-    # remove old caches
-    for f in glob.glob(os.path.join(TTFL_CACHE_DIR, "ttfl_history_*.csv")):
-        try:
-            os.remove(f)
-        except Exception:
-            pass
-
     # Get HTML in memory (no file written)
     html = ttfl_getter.get_history()
 
@@ -107,6 +100,15 @@ def get_ttfl_history(cache_date: str | None = None, force_refresh: bool = False)
 
     # Save cache (only Date and Joueur columns present)
     save_df_cache(df, cache_path)
+
+    # On successful save, remove old caches (keep the newly written file)
+    for f in glob.glob(os.path.join(TTFL_CACHE_DIR, "ttfl_history_*.csv")):
+        try:
+            if os.path.abspath(f) != os.path.abspath(cache_path):
+                os.remove(f)
+        except Exception:
+            pass
+
     return df
 
 

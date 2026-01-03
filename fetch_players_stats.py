@@ -144,7 +144,21 @@ def get_players_stats(season: str = SEASON,
         merged_df = compute_ttfl_score(merged_df)
 
         # Ensure cache dir exists then save
-        os.makedirs(os.path.dirname(cache_path), exist_ok=True)
+        cache_dir = os.path.dirname(cache_path)
+        os.makedirs(cache_dir, exist_ok=True)
+
+        # Remove previous players_games caches for this season to keep only the latest
+        try:
+            pattern = os.path.join(cache_dir, f"players_games_{season.replace('-', '')}_*.csv")
+            for old in glob.glob(pattern):
+                try:
+                    if os.path.abspath(old) != os.path.abspath(cache_path):
+                        os.remove(old)
+                except Exception:
+                    pass
+        except Exception:
+            pass
+
         save_df_cache(merged_df, cache_path)
         print(f"📦 Cache sauvegardé: {cache_path}")
 
