@@ -7,6 +7,8 @@ import pandas as pd
 import top_ttfl
 from nba_api.stats.endpoints import ScoreboardV2
 from fetch_players_stats import SEASON as NBA_SEASON
+import ttfl_history
+from datetime import date as _date
 import time
 
 CACHE_PLAYERS_DIR = os.path.join("cache", "players")
@@ -96,6 +98,29 @@ def main():
         return
 
     df["_name_norm"] = df[name_col].astype(str).str.strip().str.lower()
+
+    # Ensure ttfl_history cache is up-to-date: if latest ttfl_history file is older than today, regenerate it
+    try:
+        ttfl_files = glob.glob(os.path.join(CACHE_TTFL_DIR, "ttfl_history_*.csv"))
+        latest_date = None
+        for f in ttfl_files:
+            bn = os.path.basename(f)
+            part = bn.rsplit("_", 1)[-1].replace('.csv', '')
+            try:
+                d = datetime.fromisoformat(part).date()
+                if latest_date is None or d > latest_date:
+                    latest_date = d
+            except Exception:
+                continue
+        today = _date.today()
+        if latest_date is None or latest_date < today:
+            # regenerate today's history cache
+            try:
+                ttfl_history.get_ttfl_history(cache_date=None, force_refresh=True)
+            except Exception as e:
+                print(f"Échec de la régénération de l'historique TTFL: {e}")
+    except Exception:
+        pass
 
     for target in dates:
         print(f"\n== Date: {target.isoformat()} ==")
