@@ -1,0 +1,24 @@
+# Environnement virtuel Python
+venv/
+.env/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Fichiers de cache et données locales
+data/cache/
+data/db/
+*.json
+*.sqlite
+
+# Fichiers de configuration IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Fichiers de log
+*.log
+
+# Fichiers de test (optionnel : à adapter selon vos besoins)
+tests/__pycache__/

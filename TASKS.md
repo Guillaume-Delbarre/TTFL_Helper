@@ -14,8 +14,8 @@
 ## **📌 Étape 0 : Initialisation du Projet**
 | ID       | Titre                          | Objectif                                                                 | Description                                                                                     | Statut      |
 |----------|--------------------------------|--------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|-------------|
-| **TASK-00** | Initialiser le dépôt Git       | Repository Git local avec `PROJECT.md` et `.gitignore`.                 | Créer un dépôt Git et ajouter les fichiers de base.                                           | ⏳ En cours   |
-| **TASK-01** | Configurer l'environnement Python | Fichier `requirements.txt` ou `pyproject.toml` avec les dépendances.      | Ajouter `nba_api`, `rich`, `pytest`, etc. et créer un environnement virtuel.                  | ❌ À faire   |
+| **TASK-00** | Initialiser le dépôt Git       | Repository Git local avec `PROJECT.md` et `.gitignore`.                 | Créer un dépôt Git et ajouter les fichiers de base.                                           | ✅ Terminé   |
+| **TASK-01** | Configurer l'environnement Python | Fichier `requirements.txt` ou `pyproject.toml` avec les dépendances.      | Ajouter `nba_api`, `rich`, `pytest`, etc. et créer un environnement virtuel.                  | ✅ Terminé   |
 
 ---
 
