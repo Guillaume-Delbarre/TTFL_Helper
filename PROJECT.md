@@ -23,9 +23,8 @@ La **Trashtalk Fantasy League (TTFL)** est un jeu de fantasy basketball où chaq
 ### **1. Contraintes du jeu TTFL**
 - **1 joueur par jour** : Chaque jour, un seul joueur peut être sélectionné pour marquer des points.
 - **Cooldown de 30 jours** : Un joueur sélectionné ne peut **pas** être choisi à nouveau pendant **30 jours** (soit ~30 matchs).
-- **Points TTFL** : Les points sont calculés à partir des **statistiques réelles** du joueur en match (ex : 1 point = 1 point NBA, 1 rebond = 1 point, 1 passe = 1 point, etc.).
-  *À préciser* : La formule exacte de calcul des points TTFL doit être confirmée (ex : `points = PTS + REB + AST + STL + BLK - TO`).
-
+- **Points TTFL** : Les points sont calculés à partir des **statistiques réelles** du joueur en match avec la formule suivante :
+  **`POINTS + REBONDS + PASSES + INTERCEPTIONS + CONTRES + TIRS RÉUSSIS + 3PTS RÉUSSIS + LF RÉUSSIS - (BALLES PERDUES + TIRS RATÉS + 3PTS RATÉS + LF RATÉS)`**.
 ### **2. Calcul des moyennes**
 - **Moyenne glissante** : Pour chaque joueur, calculer une moyenne mobile sur les **5 derniers matchs** (ou un nombre configurable) pour évaluer sa forme actuelle.
 - **Moyenne saisonnière** : Moyenne des stats sur toute la saison pour identifier les joueurs constants.
@@ -68,60 +67,4 @@ Un joueur est éligible si :
 ---
 
 ## 📁 **Structure du Projet**
-```
-ttfl_helper/
-│
-├── PROJECT.md               # Fichier de référence
-├── requirements.txt         # Dépendances Python
-├── pyproject.toml           # Configuration (optionnel, pour `poetry`)
-├── .gitignore               # Fichiers à exclure de Git
-│
-├── data/                    # Données stockées localement
-│   ├── cache/               # Cache des données brutes (JSON)
-│   │   ├── players.json
-│   │   ├── games.json
-│   │   └── ...
-│   └── db/                  # Base de données SQLite
-│       └── ttfl.db
-│
-├── src/                     # Code source
-│   ├── __init__.py
-│   │
-│   ├── api/                 # Module pour la récupération des données
-│   │   ├── __init__.py
-│   │   └── nba_client.py    # Client pour `nba_api`
-│   │
-│   ├── core/                # Logique métier
-│   │   ├── __init__.py
-│   │   ├── selector.py       # Algorithme de sélection des joueurs
-│   │   └── scorer.py         # Calcul des points TTFL
-│   │
-│   ├── models/              # Modèles de données
-│   │   ├── __init__.py
-│   │   ├── player.py         # Classe `Player`
-│   │   └── team.py           # Classe `Team`
-│   │
-│   ├── utils/               # Utilitaires
-│   │   ├── __init__.py
-│   │   ├── cache.py          # Gestion du cache (JSON)
-│   │   ├── config.py         # Configuration (chemins, paramètres)
-│   │   └── logger.py         # Logging
-│   │
-│   └── cli/                 # Interface en ligne de commande
-│       ├── __init__.py
-│       └── main.py           # Point d'entrée de la CLI
-│
-├── tests/                   # Tests unitaires
-│   ├── __init__.py
-│   ├── test_api.py          # Tests pour `nba_client.py`
-│   ├── test_core.py         # Tests pour `selector.py` et `scorer.py`
-│   └── test_models.py       # Tests pour les modèles
-│
-└── scripts/                 # Scripts utilitaires (optionnel)
-    └── setup_db.py          # Initialisation de la base de données
-```
 
----
-
-## 🎯 **Roadmap (Backlog)**
-Voir le fichier `TASKS.md` à la racine du projet pour la liste détaillée des tâches.
