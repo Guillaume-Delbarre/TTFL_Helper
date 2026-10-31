@@ -24,7 +24,7 @@
 |----------|--------------------------------|--------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|-------------|
 | **TASK-02** | Créer la structure des dossiers | Arborescence du projet prête à l'emploi.                                | Créer les dossiers `src/`, `data/`, `tests/`, etc. (voir `PROJECT.md`).                          | ✅ Terminé   |
 | **TASK-03** | Implémenter `config.py`         | Centraliser les chemins et paramètres globaux.                          | Définir les variables comme `DATA_DIR`, `CACHE_DIR`, `DB_PATH`, etc.                          | ✅ Terminé   |
-| **TASK-04** | Implémenter `logger.py`         | Système de logging fonctionnel.                                         | Configurer `logging` pour afficher les erreurs et infos dans un fichier ou la console.        | ❌ À faire   |
+| **TASK-04** | Implémenter `logger.py`         | Système de logging fonctionnel.                                         | Configurer `logging` pour afficher les erreurs et infos dans un fichier ou la console.        | ✅ Terminé   |
 
 ---
 

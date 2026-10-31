@@ -4,29 +4,36 @@ from pathlib import Path
 from typing import Optional
 
 def setup_logger(
-    name: str = "ttfl_helper"
+    name: str = "ttfl_helper",
+    when: str = "midnight",  # Rotation à minuit
+    interval: int = 1,       # Tous les jours
+    backup_count: int = 7,   # Conserver 7 jours de logs
 ) -> logging.Logger:
     """Création et configuration de l'instance logger"""
     # Création du répertoire de log si il n'existe pas
     Path(LOG_FILE).parent.mkdir(parents=True, exist_ok=True)
 
-    # Create logger
+    # Création du logger
     logger = logging.getLogger(name)
     logger.setLevel(getattr(logging, LOG_LEVEL))
 
-    # Create file handler
-    file_handler = logging.FileHandler(LOG_FILE)
-    file_handler.setLevel(getattr(logging, LOG_LEVEL))
+    # Création du timed rotating file handler
+    timed_handler = TimedRotatingFileHandler(
+        LOG_FILE,
+        when=when,
+        interval=interval,
+        backupCount=backup_count,
+        encoding="utf-8",
+    )
+    timed_handler.setLevel(getattr(logging, LOG_LEVEL))
 
-    # Create formatter
+    # Création du formatter à partir des configs
     formatter = logging.Formatter(LOG_FORMAT)
-    file_handler.setFormatter(formatter)
+    timed_handler.setFormatter(formatter)
 
-    # Add handler to logger
-    logger.addHandler(file_handler)
+    # Ajout du handler
+    logger.timed_handler(rotating_handler)
 
     return logger
 
 logger = setup_logger()
-
-__all__ = ["logger"]

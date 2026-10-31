@@ -6,16 +6,14 @@ from src.utils.logger import setup_logger, logger
 
 @pytest.fixture
 def cleanup_logs():
-    """Fixture pour nettoyer les fichiers de log avant et après chaque test."""
-    # Nettoyer avant le test
-    if Path(LOG_FILE).exists():
-        Path(LOG_FILE).unlink()
-
+    """Fixture pour nettoyer les fichiers de log de test."""
+    # Nettoyer les fichiers de log avant le test
+    for log_file in Path(LOG_FILE).parent.glob("ttfl_helper*.log"):
+        log_file.unlink()
     yield
-
-    # Nettoyer après le test
-    if Path(LOG_FILE).exists():
-        Path(LOG_FILE).unlink()
+    # Nettoyer les fichiers de log après le test
+    for log_file in Path(LOG_FILE).parent.glob("ttfl_helper*.log"):
+        log_file.unlink()
 
 def test_setup_logger_creates_log_file(cleanup_logs):
     """Test que setup_logger crée un fichier de log."""
