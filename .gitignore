@@ -22,3 +22,4 @@ data/db/
 
 # Fichiers de test (optionnel : à adapter selon vos besoins)
 tests/__pycache__/
+.pytest_cache
