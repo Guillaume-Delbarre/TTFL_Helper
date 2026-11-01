@@ -20,6 +20,9 @@ DB_PATH = DB_DIR / "ttfl.db"
 # ======================
 # Paramètres par défaut
 # ======================
+# Saison NBA
+NBA_SEASON = "2026-27"
+
 # Nombre de matchs pour calculer la moyenne glissante
 MOVING_AVERAGE_GAMES = 5
 

@@ -1,4 +1,5 @@
 import logging
+from logging.handlers import TimedRotatingFileHandler
 from src.utils.config import LOG_LEVEL, LOG_FORMAT, LOG_FILE
 from pathlib import Path
 from typing import Optional
@@ -32,7 +33,7 @@ def setup_logger(
     timed_handler.setFormatter(formatter)
 
     # Ajout du handler
-    logger.timed_handler(rotating_handler)
+    logger.addHandler(timed_handler)
 
     return logger
 
