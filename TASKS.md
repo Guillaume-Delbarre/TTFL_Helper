@@ -31,10 +31,10 @@
 ## **📌 Étape 2 : Récupération des Données (API NBA)**
 | ID       | Titre                          | Objectif                                                                 | Description                                                                                     | Statut      |
 |----------|--------------------------------|--------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|-------------|
-| **TASK-05** | Étudier `nba_api`               | Comprendre les endpoints disponibles.                                    | Lister les fonctions utiles (ex : `leaguegamelog`, `playergamelog`).                         | ⏳ En cours   |
-| **TASK-06** | Créer `nba_client.py`           | Récupérer les données des joueurs et matchs.                             | Implémenter des fonctions pour :<br>- Lister les joueurs actifs.<br>- Récupérer les stats d'un joueur.<br>- Récupérer le calendrier NBA. | ❌ À faire   |
-| **TASK-07** | Tester `nba_client.py`          | Vérifier que les données sont récupérées correctement.                  | Écrire des tests unitaires pour valider les appels à `nba_api`.                               | ❌ À faire   |
-| **TASK-08** | Implémenter `cache.py`          | Mettre en cache les données pour éviter les appels répétés.              | Sauvegarder les données en JSON (ex : `data/cache/players.json`) et les recharger si nécessaire. | ❌ À faire   |
+| **TASK-05** | Étudier `nba_api`               | Comprendre les endpoints disponibles.                                    | Lister les fonctions utiles (ex : `leaguegamelog`, `playergamelog`).                         | ✅ Terminé    |
+| **TASK-06** | Créer `nba_client.py`           | Récupérer les données des joueurs et matchs.                             | Implémenter des fonctions pour :<br>- Lister les joueurs actifs.<br>- Récupérer les stats d'un joueur.<br>- Récupérer le calendrier NBA. | ⏳ En cours   |
+| **TASK-07** | Tester `nba_client.py`          | Vérifier que les données sont récupérées correctement.                  | Écrire des tests unitaires pour valider les appels à `nba_api`.                               | ⏳ En cours   |
+| **TASK-08** | Implémenter `cache.py`          | Mettre en cache les données pour éviter les appels répétés.              | Sauvegarder les données en JSON (ex : `data/cache/players.json`) et les recharger si nécessaire. | ⏳ En cours   |
 
 ---
 

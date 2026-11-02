@@ -19,6 +19,7 @@ data/db/
 
 # Fichiers de log
 *.log
+logs/*
 
 # Fichiers de test (optionnel : à adapter selon vos besoins)
 tests/__pycache__/

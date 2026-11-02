@@ -1,7 +1,10 @@
 import json
 from pathlib import Path
 
-def save_to_cache(data: Dict, file_path: str) -> None:
+def save_to_cache(
+    data: Dict,
+    file_path: str
+) -> None:
     """Sauvegarde les données dans un fichier JSON."""
     Path(file_path).parent.mkdir(parents=True, exist_ok=True)
     with open(file_path, "w") as f:
