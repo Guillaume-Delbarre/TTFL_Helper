@@ -12,7 +12,9 @@ LOGS_DIR = BASE_DIR / "logs"
 
 # Fichiers JSON pour le cache
 PLAYERS_JSON_PATH = CACHE_DIR / "players.json"
-GAMES_JSON_PATH = CACHE_DIR / "games.json"
+GAMES_JSON_PATH = CACHE_DIR / "games_{season}.json"  # À formater avec la saison
+GAME_STATS_DIR = CACHE_DIR / "game_stats"
+GAME_STATS_JSON_PATH = GAME_STATS_DIR / "game_stats_{game_id}.json"  # À formater avec game_id
 
 # Base de données SQLite
 DB_PATH = DB_DIR / "ttfl.db"

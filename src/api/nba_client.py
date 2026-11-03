@@ -17,26 +17,47 @@ class NBAClient:
         self.season = season
         logger.info(f"Initialisation du client NBA pour la saison {self.season}")
 
-    def get_all_players(self) -> List[Dict]:
-        """Récupère tous les joueurs actifs de la saison.
+    def get_all_players_from_api(self) -> List[Dict]:
+        """Récupère tous les joueurs actifs de la saison via l'api.
 
         Returns:
             List[Dict]: Liste des joueurs avec leurs informations (id, nom, équipe, etc.).
         """
-        logger.info("Récupération de la liste des joueurs")
+        logger.info("Récupération de la liste des joueurs via l'api NBA")
         try :
             return players.get_active_players()
         except Exception as e:
             logger.error(f"Erreur lors de la récupération des joueurs: {e}")
             return []
 
-    def get_all_games(self) -> pd.DataFrame:
-        """Récupère tous les matchs de la saison.
+    def get_all_players(self) -> list[Dict]:
+        """Récupère tous les joueurs actifs de la saison (avec cache).
+
+        Returns:
+            List[Dict]: Liste des joueurs avec leurs informations (id, nom, équipe, etc.).
+        """
+        logger.info("Récupération de la liste des joueurs")
+
+        # Vérification si les joueurs sont déjà en cache
+        cached_players = load_from_cache(PLAYERS_JSON_PATH)
+        if cached_players is not None:
+            logger.info("Joueurs chargés depuis le cache.")
+            return cached_players
+
+        # Sinon, récupère depuis l'API
+        else :
+            players_dict = self.get_all_players_from_api()
+            save_to_cache(players_dict, PLAYERS_JSON_PATH)
+            return players_dict
+
+
+    def get_all_games_api(self) -> pd.DataFrame:
+        """Récupère tous les matchs de la saison via l'api.
 
         Returns:
             pd.DataFrame: DataFrame avec les informations sur les matchs.
         """
-        logger.info("Récupération de tous les matchs de la saison")
+        logger.info("Récupération de tous les matchs de la saison via l'api")
         try :
             game_logs = leaguegamelog.LeagueGameLog(
                 season=self.season,
@@ -46,6 +67,29 @@ class NBAClient:
         except Exception as e:
             logger.error(f"Erreur lors de la récupération des joueurs: {e}")
             return pd.DataFrame()
+    
+    def get_all_games(self) -> pd.DataFrame:
+        """Récupère tous les matchs de la saison (avec cache).
+
+        Returns:
+            pd.DataFrame: DataFrame avec les informations sur les matchs.
+        """
+        games_file = GAMES_JSON_PATH.format(season=self.season.replace("-", "_"))
+        logger.info("Récupération de tous les matchs de la saison")
+
+        # Vérification si les matchs sont déjà en cache
+        cached_games = load_from_cache(games_file, as_dataframe=True)
+        if cached_games is not None:
+            logger.info("Matchs chargés depuis le cache.")
+            return cached_games
+
+        # Sinon, récupère depuis l'API
+        else :
+            games = self.get_all_games_from_api()
+            save_to_cache(games, games_file)
+            return players_dict
+
+
 
     def get_game_stats(self, game_id: str) -> Optional[pd.DataFrame]:
         """Récupère les statistiques des joueurs pour un match spécifique.
